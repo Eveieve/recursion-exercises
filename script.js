@@ -59,13 +59,117 @@
 // a function called all. accepts an array and a callback
 // function all returns true, if every value in the array returns true
 
-function all(array, callback) {
-  if (array.every(callback)) return true;
-  else return false;
+// function all(array, callback) {
+//   if (array.every(callback)) return true;
+//   else return false;
+// }
+
+// var allAreLessThanSeven = all([1, 2, 9], function (num) {
+//   return num < 10;
+// });
+
+// console.log(allAreLessThanSeven); // false
+
+// 6. write a function called productOfArray which takes in an array of numbers
+// and returns the product of them all
+
+// function productOfArray(array) {
+//   return array.reduce((acc, curr) => acc * curr);
+// }
+
+// let sixty = productOfArray([1, 2, 3, 10]); // 60
+// console.log(sixty);
+
+// 7. sumRange
+// iteratively
+//  function sumRange(n) {
+//   let total = 0;
+//   for (let i =n; i > 0; i--) {
+//     total += i
+//   }
+//   return total
+// }
+
+// recursively
+
+// function sumRangeRecursive(n, total = 0) {
+
+//   if (n <= 0) {
+//     return total // the current total
+//   }
+//   return sumRangeRecursive(n-1, total + n);
+// }
+
+// sumRangeRecursive(3,0)
+//   sumRangeRecursive(2,3) // call itself
+//     sumRangeRecursive(1,5)
+//       sumRangeRecursive(0, 6) // delegating the job to its parent
+//       return 6 //
+//     return 6  // returns what the last function call returns
+//   return 6
+// return 6
+
+// 8. print out all children names.
+
+// const tree = {
+//   name: "John",
+//   children: [
+//     {
+//       name: "Jim",
+//       children: [],
+//     },
+//     {
+//       name: "Zoe",
+//       children: [
+//         {
+//           name: "kyle",
+//           children: [],
+//         },
+//         {
+//           name: "sophia",
+//           children: [],
+//         },
+//       ],
+//     },
+//   ],
+// };
+
+// function printChildrenRecursive(t) {
+//   if (t.children.length === 0) {
+//     // if nested object to print out is 0
+//     return;
+//   }
+//   t.children.forEach((child) => {
+//     console.log(child.name);
+//     printChildrenRecursive(child);
+//   });
+// }
+
+// 9. Search JS object
+const nestedObject = {
+  data: {
+    info: {
+      stuff: {
+        thing: {
+          moreStuff: {
+            magicNumber: 44,
+            something: "foo2",
+          },
+        },
+      },
+    },
+  },
+};
+
+function contains(tree, value) {
+  for (const property in tree) {
+    if (typeof tree[property] === "object") {
+      return contains(tree[property], value); // repeat this if above condition is met
+    }
+    if (tree[property] == value) {
+      return true;
+    } else return false;
+  }
 }
-
-var allAreLessThanSeven = all([1, 2, 9], function (num) {
-  return num < 10;
-});
-
-console.log(allAreLessThanSeven); // false
+console.log(contains(nestedObject, 44)); // true
+// let doesntHaveIt = contains(nestedObject, "foo"); // false
