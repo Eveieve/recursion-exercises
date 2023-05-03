@@ -146,30 +146,78 @@
 // }
 
 // 9. Search JS object
-const nestedObject = {
-  data: {
-    info: {
-      stuff: {
-        thing: {
-          moreStuff: {
-            magicNumber: 44,
-            something: "foo2",
-          },
-        },
-      },
-    },
-  },
-};
+// const nestedObject = {
+//   data: {
+//     info: {
+//       stuff: {
+//         thing: {
+//           moreStuff: {
+//             magicNumber: 44,
+//             something: "foo2",
+//           },
+//         },
+//       },
+//     },
+//   },
+// };
 
-function contains(tree, value) {
-  for (const property in tree) {
-    if (typeof tree[property] === "object") {
-      return contains(tree[property], value); // repeat this if above condition is met
+// function contains(tree, value) {
+//   for (const property in tree) {
+//     if (typeof tree[property] === "object") {
+//       return contains(tree[property], value); // repeat this if above condition is met
+//     }
+//     if (tree[property] == value) {
+//       return true;
+//     } else return false;
+//   }
+// }
+// console.log(contains(nestedObject, 44)); // true
+// // let doesntHaveIt = contains(nestedObject, "foo"); // false
+array = [3, 2, 4, 0];
+// merge sorted arrays.
+let C = [];
+
+// A and B are sorted in order.
+function merge(A, B) {
+  let m = A.length; // length of array A
+  let n = B.length;
+  let k = 0;
+  let j = 0;
+  let i = 0;
+  console.log(A);
+  console.log(B);
+  while (i < m && j < n) {
+    if (A[i] < B[j]) {
+      C[k++] = A[i++];
+      console.log(C);
+    } else if (B[j] < A[i]) {
+      console.log(C[k]);
+      C[k++] = B[j++];
+      console.log(C);
     }
-    if (tree[property] == value) {
-      return true;
-    } else return false;
+    for (i < m; i++; ) C[k++] = A[i];
+    for (j < n; j++; ) C[k++] = B[j];
+  }
+  return C; // return after copying all values.
+}
+
+function mergeSort(l, h, array) {
+  if (array.length <= 1) return array;
+  else if (array.length > 1) {
+    const mid = Math.ceil((l + h) / 2);
+    const leftArray = array.slice(l, mid);
+    const rightArray = array.slice(mid, h);
+    console.log(leftArray);
+    console.log(rightArray);
+    const sortedLeft = mergeSort(l, mid, leftArray);
+    console.log(sortedLeft);
+    const sortedRight = mergeSort(mid, h, rightArray);
+    console.log(sortedRight);
+    const mergedArray = merge(sortedLeft, sortedRight);
+    // console.log(mergedArray);
+    return mergedArray;
   }
 }
-console.log(contains(nestedObject, 44)); // true
-// let doesntHaveIt = contains(nestedObject, "foo"); // false
+
+console.log(mergeSort(0, 4, array));
+// i was not storing !!!!!!!!
