@@ -1,4 +1,4 @@
-// array = [4, 2, 0, 45, 12, 1, 9, 13, 8, 6, -3];
+array = [4, 2, 0, 45, 12, 1, 9, 13, 8, 6, -3, 23, 11];
 // array = [-3, 0, -5, -10, -45, -13, 13];
 // array = [2, 4, 7, 4, 5, 6, 6, -7]; // duplicate values
 // merge sorted arrays.
@@ -17,13 +17,13 @@ function merge(A, B) {
   while (k < m + n) {
     if (A[i] <= B[j] || B[j] === undefined) {
       C[k++] = A[i++];
-      console.log("ongoing C", C);
+      console.log("ongoing1", C);
     } else if (B[j] <= A[i] || A[i] === undefined) {
       C[k++] = B[j++];
       console.log("ongoing2", C);
     }
   }
-  console.log("C", C);
+  console.log("final C", C);
   return C; // return after copying all values.
 }
 
@@ -33,8 +33,8 @@ function mergeSort(array) {
   if (array.length <= 1) return array;
   else if (array.length > 1) {
     const mid = Math.ceil((l + h) / 2);
-    const leftArray = array.slice(l, mid);
-    const rightArray = array.slice(mid, h);
+    const leftArray = array.slice(l, mid); //excluding mid
+    const rightArray = array.slice(mid, h); // slice contains mid
     console.log("leftArray", leftArray);
     console.log("rightArray", rightArray);
     const sortedLeft = mergeSort(leftArray);
